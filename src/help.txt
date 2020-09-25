@@ -1,0 +1,58 @@
+   const listItems = props.location.state.comenents.map(comment =>
+        <p key={comment.number.toString()}>
+        {comment.number}
+        </p>
+    );
+
+          <div className="links">
+            <Link to="/" >Home</Link>
+            <Link to="/about" >About</Link>
+            
+            <Link to={{ pathname: '/reviews', state: { comenents: reviews.comments, lang:lang } 
+                                                    }}   >ReviewsComents</Link>
+       
+        </div>
+       </div>
+       ---------------------------------------------------------------------------------------
+
+       import React  from 'react';
+
+//  menuInfo={RISTORANTE_MENU.dishes[menuCounter]}/>
+
+const Review =(props) => {
+
+    console.log('Coments has');
+    console.log(props.location.state.comenents);
+    console.log('lang has');
+    console.log(props.location.state.idioma);
+    console.log('state has');
+    console.log(props.location.state);
+    console.log('location has');
+    console.log(props.location);
+    
+
+    const listItems = props.location.state.comenents.map(comment =>
+        <p key={comment.number}>
+        {comment.language.en}
+        </p>
+   );
+
+    return (
+        <div>
+           <p>Reviews loop coments and use lang  </p> 
+            {listItems}
+        </div>
+    )
+}
+
+export default Review
+
+      lang === "en" 
+               ?
+                <Link to="/" >Home</Link>
+                <Link to="/about" >About</Link>
+                <Link to={{ pathname: '/reviews', state: {  data:PassProps()   }  }}   >ReviewsComents</Link>
+                :
+                <Link to="/" >Home</Link>
+                <Link to="/about" >Conocenos</Link>
+                <Link to={{ pathname: '/reviews', state: {  data:PassProps()   }  }}   >Comentarios</Link>

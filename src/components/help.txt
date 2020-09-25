@@ -1,0 +1,152 @@
+import React  ,{useState} from 'react';
+import RISTORANTE_MENU from '../menu/menu';
+import Content from '../content/content.component';
+import Header from '../header/header.component';
+import MenuImage from '../picture/pictture.component';
+import Arrow from '../arrow/arrow.component';
+
+import './main.styles.scss';
+ 
+const Main = () => {
+   const [lang,setLang] = useState('en');
+   const [menu,setMenu] = useState(RISTORANTE_MENU);
+   const [menuCounter,setmenuCounter] = useState(0);
+ 
+ 
+   const Advance = (add) => {
+       let arrayLength = RISTORANTE_MENU.dishes.length;
+      // debugger;
+       if( menuCounter < arrayLength ) {
+           
+           add === '+' ? setmenuCounter(menuCounter + 1) : setmenuCounter(menuCounter - 1)
+           localStorage.setItem('menuCounter', menuCounter);
+       }
+   }
+
+   return (
+       <div>
+           <Header/>
+           <div className="deaderDropDown">
+                    
+           <select name="language"
+           onChange={
+                   e => (setLang(e.target.value))
+               }>
+               <option value="en">English</option>
+               <option value="es">Espanol</option>
+          
+           </select>
+       </div>
+       <div  className="main">
+            <div className="escription">
+               <Content
+               lang={lang}
+               menuInfo={RISTORANTE_MENU.dishes[menuCounter]}/>
+           </div>
+           <div className="description-img">
+               <MenuImage menuInfo={RISTORANTE_MENU.dishes[menuCounter]} />
+           </div>
+       </div>
+       <button onClick={
+           () => Advance('-')
+       }><Arrow label=" << PREVIOUS" /></button>
+       <span>                                       </span>
+       <button onClick={
+           () => Advance('+')
+       }><Arrow label=" NEXT >>" /></button>
+ 
+       </div>
+         
+   )
+}
+ 
+export default Main
+
+--------------------------------------------------------------------------------------
+
+import React  ,{useState} from 'react';
+import RISTORANTE_MENU from '../menu/menu';
+import Content from '../content/content.component';
+import Header from '../header/header.component';
+import MenuImage from '../picture/pictture.component';
+import Arrow from '../arrow/arrow.component';
+
+ 
+import './main.styles.scss';
+ 
+const Main = () => {
+   const [lang,setLang] = useState('en');
+   const [menu,setMenu] = useState(RISTORANTE_MENU);
+   const [menuCounter,setmenuCounter] = useState(0);
+ 
+ 
+   const Advance = (add) => {
+       let arrayLength = RISTORANTE_MENU.dishes.length;
+      // debugger;
+       if( menuCounter < arrayLength ) {
+           
+           add === '+' ? setmenuCounter(menuCounter + 1) : setmenuCounter(menuCounter - 1)
+           localStorage.setItem('menuCounter', menuCounter);
+       }
+   }
+
+   return (
+       <div>
+           <Header/>
+           <div className="deaderDropDown">
+                    
+           <select name="language"
+           onChange={
+                   e => (setLang(e.target.value))
+               }>
+               <option value="en">English</option>
+               <option value="es">Espanol</option>
+          
+           </select>
+       </div>
+       <div  className="main">
+            <div className="escription">
+               <Content
+               lang={lang}
+               menuInfo={RISTORANTE_MENU.dishes[menuCounter]}/>
+           </div>
+           <div className="description-img">
+               <MenuImage menuInfo={RISTORANTE_MENU.dishes[menuCounter]} />
+           </div>
+       </div>
+ 
+       {    
+            (menuCounter >= 1) ? (
+                    <button onClick={
+                        () => Advance('-')
+                    }><Arrow label=" << PREVIOUS" /></button>
+                ) : null
+        }
+    
+         {
+              (menuCounter < RISTORANTE_MENU.dishes.length - 1) ? (
+                <button onClick={
+                    () => Advance('+')
+                }><Arrow label=" NEXT >>" /></button>
+                ) : null  
+         }
+ 
+       </div>
+         
+   )
+}
+ 
+export default Main
+
+      <div className="links">
+                <Link to="/" >Home</Link>
+                <Link to="/reviews" >Reviews</Link>
+                <Link to="/abut" >About</Link>
+            </div>
+
+            
+            <Switch>
+                <Route component={Main} exact path="/"/>
+                <Route component={About} exact path="/about"/>
+                <Route component={Review} exact path="/reviews"/>
+           </Switch>
